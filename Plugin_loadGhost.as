@@ -10,7 +10,7 @@
 string name = "";
 string inputUrl = "";
 string savedMessage = "";
-bool triggerDownload = false;
+bool urlSent = false;
 bool windowVisible = false;
 
 void log(string msg)
@@ -38,9 +38,9 @@ void RenderInterface()
             UI::Text("Enter URL for the Ghost");
             inputUrl = UI::InputText("Ghost URL", inputUrl);
             UI::Text("\\$f99WARNING:\\$ccc An invalid URL will result in the game crashing");
-            if (!triggerDownload && UI::Button("Race"))
+            if (!urlSent && UI::Button("Race"))
             {
-                triggerDownload = true;
+                urlSent = true;
             }
             if (savedMessage != "")
             {
@@ -87,41 +87,43 @@ void Main()
 
     while (true)
     {
-        if (triggerDownload)
+        if (urlSent)
         {
-            log("Download triggered for " + inputUrl);
-            savedMessage = "";
             auto dataFileMgr = TryGetDataFileMgr();
             CTrackMania@ app = cast<CTrackMania>(GetApp());
-            if (dataFileMgr !is null && app.RootMap !is null && inputUrl != "")
-            {
-                CWebServicesTaskResult_GhostScript@ result = dataFileMgr.Ghost_Download("", inputUrl);
-                inputUrl = "";
-                uint timeout = 20000;
-                uint currentTime = 0;
-                while (result.Ghost is null && currentTime < timeout)
+            if (IO::FileExists(inputUrl)){
+                // LOAD LOCAL GHOST HERE
+            }else{
+                log("Download triggered for " + inputUrl);
+                if (dataFileMgr !is null && app.RootMap !is null && inputUrl != "")
                 {
-                    currentTime += 100;
-                    sleep(100);
-                }
-                CGameGhostScript@ ghost = cast<CGameGhostScript>(result.Ghost);
-                auto pgs = getPGS();
-                if (ghost !is null)
-                {
-                    pgs.Ghost_Add(ghost, true);
+                    CWebServicesTaskResult_GhostScript@ result = dataFileMgr.Ghost_Download("", inputUrl);
+                    inputUrl = "";
+                    uint timeout = 20000;
+                    uint currentTime = 0;
+                    while (result.Ghost is null && currentTime < timeout)
+                    {
+                        currentTime += 100;
+                        sleep(100);
+                    }
+                    CGameGhostScript@ ghost = cast<CGameGhostScript>(result.Ghost);
+                    if (ghost !is null)
+                    {
+                        auto pgs = getPGS();
+                        pgs.Ghost_Add(ghost, true);
+                    }
+                    else
+                    {
+                        log("Download Failed");
+                    }
                 }
                 else
                 {
-                    log("Download Failed");
+                    log("Failed");
                 }
+                urlSent = false;
             }
-            else
-            {
-                log("Failed");
-            }
-            triggerDownload = false;
         }
-
         sleep(1000);
     }
 }
