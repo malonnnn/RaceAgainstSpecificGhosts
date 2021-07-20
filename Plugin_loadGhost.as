@@ -1,7 +1,7 @@
-#name "GhostToReplay"
-#author "skybaxrider"
-#category "Race"
-#perms "paid"
+#name "loadGhost"
+#author "malon"
+#category "idk"
+#perms "idk"
 
 #include "Formatting.as"
 #include "Time.as"
@@ -20,7 +20,7 @@ void log(string msg)
 
 void RenderMenu()
 {
-    if (UI::MenuItem("\\$999" + Icons::Download + "\\$z Ghost to Replay", "", windowVisible) && !windowVisible)
+    if (UI::MenuItem("\\$999" + Icons::Download + "\\$z Ghost to Race", "", windowVisible) && !windowVisible)
     {
         windowVisible = !windowVisible;
     }
@@ -30,15 +30,15 @@ void RenderInterface()
 {
     if (windowVisible)
     {
-        UI::Begin("Ghost To Replay", windowVisible, UI::WindowFlags::NoCollapse | UI::WindowFlags::AlwaysAutoResize);
+        UI::Begin("Ghost To Race", windowVisible, UI::WindowFlags::NoCollapse | UI::WindowFlags::AlwaysAutoResize);
 
         CTrackMania@ app = cast<CTrackMania>(GetApp());
         if (app.RootMap !is null)
         {
-            UI::Text("Enter download URL for the Ghost");
+            UI::Text("Enter URL for the Ghost");
             inputUrl = UI::InputText("Ghost URL", inputUrl);
             UI::Text("\\$f99WARNING:\\$ccc An invalid URL will result in the game crashing");
-            if (!triggerDownload && UI::Button("Create Replay"))
+            if (!triggerDownload && UI::Button("Race"))
             {
                 triggerDownload = true;
             }
@@ -100,17 +100,10 @@ void Main()
                     sleep(100);
                 }
                 CGameGhostScript@ ghost = cast<CGameGhostScript>(result.Ghost);
+                auto ghostMgr = CGameGhostMgrScript();
                 if (ghost !is null)
                 {
-                    string safeMapName = StripFormatCodes(app.RootMap.MapName);
-                    string safeUserName = ""; // ghost.Nickname;
-                    string safeCurrTime = Regex::Replace(app.OSLocalDate, "[/ ]", "_");
-                    string fmtGhostTime = Time::Format(ghost.Result.Time);
-                    string replayName = safeMapName + "_" + safeUserName + "_" + safeCurrTime + "_(" + fmtGhostTime + ")";
-                    string replayPath = "Downloaded/" + replayName;
-                    savedMessage = "Saving replay to " + replayPath + ".Replay.Gbx";
-                    log(savedMessage);
-                    dataFileMgr.Replay_Save(replayPath, app.RootMap, ghost);
+                    ghostMgr.Ghost_Add(ghost);
                 }
                 else
                 {
