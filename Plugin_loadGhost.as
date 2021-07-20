@@ -75,6 +75,11 @@ CGameDataFileManagerScript@ TryGetDataFileMgr()
     return null;
 }
 
+CSmArenaRulesMode@ getPGS() {
+    auto app = cast<CTrackMania@>(GetApp());
+    return cast<CSmArenaRulesMode@>(app.PlaygroundScript);
+}
+
 void Main()
 {
     name = Meta::ExecutingPlugin().Name;
@@ -100,10 +105,10 @@ void Main()
                     sleep(100);
                 }
                 CGameGhostScript@ ghost = cast<CGameGhostScript>(result.Ghost);
-                auto ghostMgr = CGameGhostMgrScript();
+                auto pgs = getPGS();
                 if (ghost !is null)
                 {
-                    ghostMgr.Ghost_Add(ghost);
+                    pgs.Ghost_Add(ghost, true);
                 }
                 else
                 {
