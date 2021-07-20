@@ -92,13 +92,15 @@ void Main()
             auto dataFileMgr = TryGetDataFileMgr();
             CTrackMania@ app = cast<CTrackMania>(GetApp());
             if (IO::FileExists(inputUrl)){
-                // LOAD LOCAL GHOST HERE
+                CWebServicesTaskResult_GhostListScript@ ghosts = dataFileMgr.Replay_Load(inputUrl);
+                auto singleGhost = ghosts.Ghosts[0];
+                auto pgs = getPGS();
+                pgs.Ghost_Add(singleGhost, true);
             }else{
                 log("Download triggered for " + inputUrl);
                 if (dataFileMgr !is null && app.RootMap !is null && inputUrl != "")
                 {
                     CWebServicesTaskResult_GhostScript@ result = dataFileMgr.Ghost_Download("", inputUrl);
-                    inputUrl = "";
                     uint timeout = 20000;
                     uint currentTime = 0;
                     while (result.Ghost is null && currentTime < timeout)
@@ -121,8 +123,9 @@ void Main()
                 {
                     log("Failed");
                 }
-                urlSent = false;
             }
+            inputUrl = "";
+            urlSent = false;
         }
         sleep(1000);
     }
