@@ -2,7 +2,7 @@
 #author "https://openplanet.nl/u/banjee, Discord user Ties0017#0017, malon, Discord user 100480922406653952"
 #category "Race"
 #perms "full"
-//v1.2
+//v1.3
 
 #include "Formatting.as"
 #include "Time.as"
@@ -62,7 +62,7 @@ void RenderInterface()
         {
             UI::Text("Paste the URL of the Specific Ghost from trackmania.io below");
             UI::Text("or paste the path of a downloaded Replay.Gbx file.");
-            inputUrl = UI::InputText("Ghost URL", inputUrl);
+            inputUrl = UI::InputText("<- Ghost URL or file path", inputUrl);
             if (!urlSent && UI::Button("Load Specific Ghost"))
             {
                 urlSent = true;
@@ -81,7 +81,7 @@ void RenderInterface()
                     UI::NextColumn();
                     AddTimeString(info.time);
                     UI::NextColumn();
-                    if(UI::Button("Remove Ghost")){
+                    if(UI::Button("Remove Ghost " + (i+1))){
                         removeGhost = true;
                         ghostToRemove = info;
                         indexToRemove = i;
@@ -101,6 +101,8 @@ void RenderInterface()
         {
             UI::Text("Play the track you want to combine the ghost(s) with");
             savedMessage = "";
+            ghostList.Resize(1);
+            ghostList.RemoveLast();
         }
 
         UI::End();
@@ -204,6 +206,12 @@ void Main()
 
                 ghostList.InsertLast(gi);
 
+                for(int i = 0; i < ghostList.get_Length(); i++){
+                    log(ghostList[i].driverName + " @ " + i);
+                }
+                log("-----");
+
+
                 inputUrl = "";
                 urlSent = false;
                 savedMessage = "";
@@ -219,6 +227,7 @@ void Main()
 
             auto pgs = getPGS();
             if (pgs !is null) {
+                log("trying to remove " + ghostToRemove.driverName + " @ " + indexToRemove);
                 pgs.Ghost_Remove(ghostToRemove.instance);
                 ghostList.RemoveAt(indexToRemove);
             }
