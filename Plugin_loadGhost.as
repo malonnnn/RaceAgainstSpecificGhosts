@@ -1,7 +1,7 @@
 #name "loadGhost"
 #author "https://openplanet.nl/u/banjee, malon, Discord user Ties0017#0017"
 #category "Race"
-#perms "unverified"
+#perms "paid"
 
 #include "Formatting.as"
 #include "Time.as"
@@ -126,6 +126,7 @@ void Main()
             }
             inputUrl = "";
             urlSent = false;
+            savedMessage = "";
         }
         sleep(1000);
     }
