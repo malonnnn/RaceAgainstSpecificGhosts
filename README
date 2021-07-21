@@ -1,10 +1,22 @@
-1. Load the map you want the ghost for
-(example: Winter 2021 - 25)
-2. In the Scripts dropdown menu of OpenPlanet, choose "Ghost to Race"  
-3. In the popup window, put in the trackmania.io link of the ghost you want to race  
-(example: https://trackmania.io/api/download/ghost/5a1796df-557d-4aff-a44e-d473b1477e47)  
-or the path of the replay file  
-(example: C:\Users\pp\Downloads\pupu.Replay.Gbx)
+Requires:
+  * Trackmania 2020 (duh)
+  * "Standard Access" subscription or greater, free will not work (unconfirmed)
+  * OpenPlanet 
+
+How to install:
+  * https://openplanet.nl/tutorials/installation
+  * https://openplanet.nl/tutorials/installing-plugins
+
+How to use after installing:
+  1. Load the map you want the ghost for
+  (example: Winter 2021 - 25)
+
+  2. In the Scripts dropdown menu of OpenPlanet, choose "Ghost to Race"  
+
+  3. In the popup window, put in the trackmania.io link of the ghost you want to race  
+  (example: https://trackmania.io/api/download/ghost/5a1796df-557d-4aff-a44e-d473b1477e47)  
+  or the path of the replay file  
+  (example: C:\Users\pp\Downloads\pupu.Replay.Gbx)
 
 To remove ghosts:
-* Reload the map, "Drive Alone" doesn't work
+  * Reload the map, "Drive Alone" doesn't work
