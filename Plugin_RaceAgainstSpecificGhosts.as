@@ -1,8 +1,8 @@
 #name "RaceAgainstSpecificGhosts"
 #author "https://openplanet.nl/u/banjee, malon, Discord user Ties0017#0017, Discord user 100480922406653952"
 #category "Race"
-#perms "paid"
-//v1.0
+#perms "full"
+//v1.1
 
 #include "Formatting.as"
 #include "Time.as"
