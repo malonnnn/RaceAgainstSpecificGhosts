@@ -15,7 +15,7 @@
   1. Load the map you want the ghost for
   (example: Winter 2021 - 25)
 
-  2. In the Scripts dropdown menu of Openplanet, choose "Ghost to Race"  
+  2. In the Scripts dropdown menu of Openplanet, choose "Race Against Specific Ghost"  
 
   3. In the popup window, put in the trackmania.io link of the ghost you want to race  
   (example: <https://trackmania.io/api/download/ghost/5a1796df-557d-4aff-a44e-d473b1477e47>)  
@@ -24,7 +24,7 @@
 
 ## To remove ghosts:
 
-  * Reload the map, "Drive Alone" doesn't work
+  * Click the "Remove" button, located in the above popup window
 
 ## My personal use for the plugin:
 
