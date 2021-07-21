@@ -1,4 +1,4 @@
-#name "loadGhost"
+#name "RaceAgainstSpecificGhosts"
 #author "https://openplanet.nl/u/banjee, malon, Discord user Ties0017#0017"
 #category "Race"
 #perms "paid"
