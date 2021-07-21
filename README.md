@@ -1,4 +1,4 @@
-# Ghosts
+# Race Against Specific Ghosts
 
 ## Requires:
   * [Trackmania 2020](https://www.trackmania.com/) (duh)
