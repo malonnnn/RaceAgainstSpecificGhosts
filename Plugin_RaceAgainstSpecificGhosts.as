@@ -1,8 +1,8 @@
 #name "RaceAgainstSpecificGhosts"
-#author "https://openplanet.nl/u/banjee, malon, Discord user Ties0017#0017"
+#author "https://openplanet.nl/u/banjee, malon, Discord user Ties0017#0017, Discord user 100480922406653952"
 #category "Race"
 #perms "paid"
-//ver 1.0
+//v1.0
 
 #include "Formatting.as"
 #include "Time.as"
@@ -21,7 +21,7 @@ void log(string msg)
 
 void RenderMenu()
 {
-    if (UI::MenuItem("\\$999" + Icons::Download + "\\$z Ghost to Race", "", windowVisible) && !windowVisible)
+    if (UI::MenuItem("\\$999" + Icons::Download + "\\$z Race Against Specifc Ghost", "", windowVisible) && !windowVisible)
     {
         windowVisible = !windowVisible;
     }
@@ -31,15 +31,16 @@ void RenderInterface()
 {
     if (windowVisible)
     {
-        UI::Begin("Ghost To Race", windowVisible, UI::WindowFlags::NoCollapse | UI::WindowFlags::AlwaysAutoResize);
+        UI::Begin("Race Against Specifc Ghost", windowVisible, UI::WindowFlags::NoCollapse | UI::WindowFlags::AlwaysAutoResize);
 
         CTrackMania@ app = cast<CTrackMania>(GetApp());
         if (app.RootMap !is null)
         {
-            UI::Text("Enter URL for the Ghost");
+            UI::Text("Paste the URL of the Specific Ghost from trackmania.io below");
+            UI::Text("or paste the path of a downloaded Replay.Gbx file.");
             inputUrl = UI::InputText("Ghost URL", inputUrl);
-            UI::Text("\\$f99WARNING:\\$ccc An invalid URL will result in the game crashing");
-            if (!urlSent && UI::Button("Race"))
+            UI::Text("\\$f99WARNING:\\$ccc An invalid URL will result in the game crashing (unconfirmed)");
+            if (!urlSent && UI::Button("Load Specific Ghost"))
             {
                 urlSent = true;
             }
@@ -50,7 +51,7 @@ void RenderInterface()
         }
         else
         {
-            UI::Text("Play the track you want to combine the ghost with");
+            UI::Text("Play the track you want to combine the ghost(s) with");
             savedMessage = "";
         }
 
@@ -93,6 +94,7 @@ void Main()
             auto dataFileMgr = TryGetDataFileMgr();
             CTrackMania@ app = cast<CTrackMania>(GetApp());
             if (IO::FileExists(inputUrl)){
+                log("File Found, opening...");
                 CWebServicesTaskResult_GhostListScript@ ghosts = dataFileMgr.Replay_Load(inputUrl);
                 auto singleGhost = ghosts.Ghosts[0];
                 auto pgs = getPGS();
@@ -122,12 +124,13 @@ void Main()
                 }
                 else
                 {
-                    log("Failed");
+                    log("Error: dataFileMgr was null, app.RootMap was null, or inputUrl was emptyString");
                 }
             }
             inputUrl = "";
             urlSent = false;
             savedMessage = "";
+            log("Ghost Loaded Successfully.");
         }
         sleep(1000);
     }
