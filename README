@@ -1,6 +1,6 @@
 Requires:
   * Trackmania 2020 (duh)
-  * Club Access
+  * "Standard Access" subscription or greater, free will not work (unconfirmed)
   * OpenPlanet 
 
 How to install:
@@ -20,3 +20,12 @@ How to use after installing:
 
 To remove ghosts:
   * Reload the map, "Drive Alone" doesn't work
+
+My personal use for the plugin:
+  * To extract the author model ghost
+  * To search the leaderboards for other racers who tied (or near-tied) author model ghost
+  * Race them all together
+  Why is it useful?
+    * It let's you know if you are "too far behind" for author time
+    * As long as someone's behind you, you're always guaranteed on pace
+    * It really helps for pushing, trying to keep up
