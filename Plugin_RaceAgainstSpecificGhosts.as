@@ -2,7 +2,7 @@
 #author "https://openplanet.nl/u/banjee, Discord user Ties0017#0017, malon, Discord user 100480922406653952"
 #category "Race"
 #perms "full"
-//v1.1
+//v1.2
 
 #include "Formatting.as"
 #include "Time.as"
